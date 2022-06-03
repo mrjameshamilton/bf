@@ -51,14 +51,6 @@ class OptimizerTest : FreeSpec({
         optimize("++--") shouldBe ""
     }
 
-    "Empty loops should be removed" {
-        optimize(".[]") shouldBe "."
-    }
-
-    "Empty loops inside other loops should be removed" {
-        optimize(",[+[]]") shouldBe ",[+{1}]"
-    }
-
     "Loops before memory changes should be removed" {
         optimize("[++++]+++") shouldBe "+{3}"
         optimize("[++++][----]+++") shouldBe "+{3}"

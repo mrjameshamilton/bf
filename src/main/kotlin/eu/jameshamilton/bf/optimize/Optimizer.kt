@@ -50,7 +50,6 @@ class Optimizer {
             when (it) {
                 is Node.Add -> it.amount == 0
                 is Node.Move -> it.amount == 0
-                is Node.Loop -> it.body.isEmpty()
                 else -> false
             }
         }

@@ -5,10 +5,10 @@ JVM using [ProGuardCORE](https://github.com/guardsquare/proguard-core) for code 
 
 Some optimizations are applied before code generation:
 
-* Zero-ing loops (`[+]` / `[-]`) are represented single instruction
+* Zero-ing loops (`[+]` / `[-]`) are represented as a single instruction
 * Consecutive zero-ing instructions are merged
 * Consecutive move and add instructions are merged into single instructions with an amount parameter
-* Empty loops and zero moves/adds are removed
+* Zero moves/adds are removed
 * Top-level loops before memory updates are removed
 
 ## Building
