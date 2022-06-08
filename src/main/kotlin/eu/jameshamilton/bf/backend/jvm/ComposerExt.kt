@@ -4,10 +4,11 @@ import proguard.classfile.AccessConstants.PUBLIC
 import proguard.classfile.AccessConstants.STATIC
 import proguard.classfile.ClassPool
 import proguard.classfile.ProgramClass
-import proguard.classfile.TypeConstants.*
 import proguard.classfile.VersionConstants.CLASS_VERSION_1_8
 import proguard.classfile.editor.ClassBuilder
 import proguard.classfile.util.ClassUtil.internalMethodReturnType
+import proguard.classfile.util.ClassUtil.internalTypeSize
+import proguard.classfile.util.InternalTypeEnumeration
 import proguard.classfile.editor.CompactCodeAttributeComposer as Composer
 
 /**
@@ -79,30 +80,14 @@ fun Composer.outline(
 }
 
 private fun parameterSequence(descriptor: String) = sequence {
-    var parameterIndex = 0
-    var parameterOffset = 0
-    var index = 1
-    while (index < descriptor.length) {
-        var nextIndex = index + 1
-        var parameterSize = 1
-        var c = descriptor[index]
-        when (c) {
-            LONG, DOUBLE -> parameterSize = 2
-            CLASS_START -> nextIndex = descriptor.indexOf(CLASS_END, nextIndex) + 1
-            ARRAY -> {
-                do {
-                    c = descriptor[nextIndex]
-                } while (descriptor[nextIndex++] == ARRAY)
-                if (c == CLASS_START) nextIndex = descriptor.indexOf(CLASS_END, nextIndex) + 1
-            }
-            METHOD_ARGUMENTS_CLOSE -> break
+    with(InternalTypeEnumeration(descriptor)) {
+        var i = 0
+        while (hasMoreTypes()) {
+            val type = nextType()
+            val size = internalTypeSize(type)
+            yield(ParameterInfo(i, type))
+            i += size
         }
-
-        yield(ParameterInfo(parameterOffset, descriptor.substring(index, nextIndex)))
-
-        index = nextIndex
-        parameterOffset += parameterSize
-        parameterIndex++
     }
 }
 
