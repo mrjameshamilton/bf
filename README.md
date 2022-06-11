@@ -1,7 +1,8 @@
 # An optimizing Brainf*ck compiler
 
-An optimizing [brainf*ck](http://brainfuck.org/brainfuck.html) compiler with 3 target backends: 
-JVM using [ProGuardCORE](https://github.com/guardsquare/proguard-core) for code generation, C and LLVM IR.
+An optimizing [brainf*ck](http://brainfuck.org/brainfuck.html) compiler with multiple target backends: 
+JVM using [ProGuardCORE](https://github.com/guardsquare/proguard-core) for code generation, 
+[smali](https://github.com/JesusFreke/smali), C and LLVM IR.
 
 Some optimizations are applied before code generation:
 
@@ -30,7 +31,7 @@ Arguments:
     script -> brainf*ck script { String }
 Options: 
     --output, -o -> output { String }
-    --target, -t [JVM] -> target { Value should be one of [jvm, c, llvm] }
+    --target, -t [JVM] -> target { Value should be one of [jvm, c, llvm, smali] }
     --debug, -d [false] 
     --help, -h -> Usage info
 ```
@@ -43,6 +44,15 @@ can instead generate a jar file with the `-o` option.
 ```shell
 $ bin/bf examples/helloworld.bf -t jvm -o helloworld.jar
 $ java -jar helloworld.jar
+```
+
+### Smali (Dalvik assembler)
+
+```shell
+$ bin/bf examples/helloworld.bf -t smali -o helloworld.smali
+$ smali a helloworld.smali -o classes.dex
+$ adb push classes.dex /sdcard/Download/classes.dex
+$ adb shell dalvikvm -cp /sdcard/Download/classes.dex Main
 ```
 
 ### C

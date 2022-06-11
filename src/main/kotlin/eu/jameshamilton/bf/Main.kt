@@ -4,6 +4,7 @@ import eu.jameshamilton.bf.Target.*
 import eu.jameshamilton.bf.backend.c.CCodeGenerator
 import eu.jameshamilton.bf.backend.jvm.JvmCodeGenerator
 import eu.jameshamilton.bf.backend.llvm.LlvmCodeGenerator
+import eu.jameshamilton.bf.backend.smali.SmaliCodeGenerator
 import eu.jameshamilton.bf.frontend.Parser
 import eu.jameshamilton.bf.frontend.Scanner
 import eu.jameshamilton.bf.optimize.Optimizer
@@ -15,7 +16,8 @@ import java.io.File
 enum class Target {
     JVM,
     C,
-    LLVM
+    LLVM,
+    SMALI
 }
 
 val parser = ArgParser("bf")
@@ -37,6 +39,7 @@ fun main(args: Array<String>) {
             JVM -> JvmCodeGenerator(output == null)
             C -> CCodeGenerator()
             LLVM -> LlvmCodeGenerator()
+            SMALI -> SmaliCodeGenerator()
         }
         generator.generate(optimizedAst, if (output != null) File(output) else null)
     } catch (e: Parser.ParseError) {
