@@ -71,7 +71,7 @@ fun Composer.outline(
                     "I", "B", "C", "S", "Z" -> it.ireturn()
                     "D" -> it.dreturn()
                     "F" -> it.freturn()
-                    "J" -> it.dreturn()
+                    "J" -> it.lreturn()
                     "V" -> it.return_()
                     else -> it.areturn()
                 }
