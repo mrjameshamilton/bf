@@ -2,7 +2,7 @@
 
 An optimizing [brainf*ck](http://brainfuck.org/brainfuck.html) compiler with multiple target backends: 
 JVM using [ProGuardCORE](https://github.com/guardsquare/proguard-core) for code generation, 
-[smali](https://github.com/JesusFreke/smali), C and LLVM IR.
+[smali](https://github.com/JesusFreke/smali), C, LLVM IR and ARM assembly.
 
 Some optimizations are applied before code generation:
 
