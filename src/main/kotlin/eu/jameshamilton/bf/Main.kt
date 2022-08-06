@@ -1,6 +1,7 @@
 package eu.jameshamilton.bf
 
 import eu.jameshamilton.bf.Target.*
+import eu.jameshamilton.bf.backend.arm.ArmCodeGenerator
 import eu.jameshamilton.bf.backend.c.CCodeGenerator
 import eu.jameshamilton.bf.backend.jvm.JvmCodeGenerator
 import eu.jameshamilton.bf.backend.llvm.LlvmCodeGenerator
@@ -17,7 +18,8 @@ enum class Target {
     JVM,
     C,
     LLVM,
-    SMALI
+    SMALI,
+    ARM
 }
 
 val parser = ArgParser("bf")
@@ -40,6 +42,7 @@ fun main(args: Array<String>) {
             C -> CCodeGenerator()
             LLVM -> LlvmCodeGenerator()
             SMALI -> SmaliCodeGenerator()
+            ARM -> ArmCodeGenerator()
         }
         generator.generate(optimizedAst, if (output != null) File(output) else null)
     } catch (e: Parser.ParseError) {

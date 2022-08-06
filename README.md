@@ -69,6 +69,15 @@ $ bin/bf examples/helloworld.bf -t llvm -o helloworld.ll
 $ lli helloworld.ll
 ```
 
+### ARM assembly
+
+```shell
+$ bin/bf examples/helloworld.bf -t arm -o helloworld.s
+$ arm-none-eabi-as helloworld.s -o helloworld.o
+$ arm-none-eabi-ld helloworld.o -o helloworld
+$ qemu-arm ./helloworld
+```
+
 # Useful brainf*ck resources
 
 * [Brainf*ck language reference](http://brainfuck.org/brainfuck.html)
