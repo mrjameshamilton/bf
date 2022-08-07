@@ -2,7 +2,7 @@
 
 An optimizing [brainf*ck](http://brainfuck.org/brainfuck.html) compiler with multiple target backends: 
 JVM using [ProGuardCORE](https://github.com/guardsquare/proguard-core) for code generation, 
-[smali](https://github.com/JesusFreke/smali), C, LLVM IR and ARM assembly.
+[smali](https://github.com/JesusFreke/smali), C, LLVM IR, ARM assembly and WASM.
 
 Some optimizations are applied before code generation:
 
@@ -76,6 +76,13 @@ $ bin/bf examples/helloworld.bf -t arm -o helloworld.s
 $ arm-none-eabi-as helloworld.s -o helloworld.o
 $ arm-none-eabi-ld helloworld.o -o helloworld
 $ qemu-arm ./helloworld
+```
+
+### WASM
+
+```shell
+$ bin/bf examples/helloworld.bf -t wasm -o helloworld.wat
+$ wasmtime helloworld.wat
 ```
 
 # Useful brainf*ck resources
