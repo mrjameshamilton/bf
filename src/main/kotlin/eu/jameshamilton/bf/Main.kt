@@ -10,6 +10,7 @@ import eu.jameshamilton.bf.backend.smali.SmaliCodeGenerator
 import eu.jameshamilton.bf.backend.wasm.WasmCodeGenerator
 import eu.jameshamilton.bf.frontend.Parser
 import eu.jameshamilton.bf.frontend.Scanner
+import eu.jameshamilton.bf.lox.LoxCodeGenerator
 import eu.jameshamilton.bf.optimize.Optimizer
 import kotlinx.cli.ArgParser
 import kotlinx.cli.ArgType
@@ -23,7 +24,8 @@ enum class Target {
     SMALI,
     ARM,
     WASM,
-    JS
+    JS,
+    LOX
 }
 
 val parser = ArgParser("bf")
@@ -31,6 +33,7 @@ val script by parser.argument(ArgType.String, description = "brainf*ck script")
 val output by parser.option(ArgType.String, shortName = "o", description = "output")
 val target by parser.option(ArgType.Choice<Target>(), shortName = "t", description = "target").default(JVM)
 val debug by parser.option(ArgType.Boolean, shortName = "d").default(false)
+val input by parser.option(ArgType.String, shortName = "i", description = "Input for the compiled program")
 
 fun main(args: Array<String>) {
     parser.parse(args)
@@ -49,6 +52,7 @@ fun main(args: Array<String>) {
             ARM -> ArmCodeGenerator()
             WASM -> WasmCodeGenerator()
             JS -> JsCodeGenerator()
+            LOX -> LoxCodeGenerator(input)
         }
         generator.generate(optimizedAst, if (output != null) File(output) else null)
     } catch (e: Parser.ParseError) {

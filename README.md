@@ -94,6 +94,20 @@ $ nodejs helloworld.js
 
 Inputs for the Javascript version are passed as command-line arguments.
 
+### Lox
+
+[Lox](https://github.com/munificent/craftinginterpreters) doesn't provide any built-in way 
+to convert ASCII character codes to characters, and the built-in `print` function always prints newlines, 
+but we can use `awk` to convert ASCII codes to characters while merging all the lines together.
+
+```shell
+$ bin/bf examples/helloworld.bf -t lox -o helloworld.lox
+$ jlox helloworld.lox | awk '{printf("%c", $1)}' ORS=' '
+```
+
+Lox also doesn't provide any ability to receive inputs so the inputs to a program
+can be compiled directly into it by using the `bf` `--input` option.
+
 # Useful brainf*ck resources
 
 * [Brainf*ck language reference](http://brainfuck.org/brainfuck.html)
