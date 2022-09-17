@@ -48,7 +48,7 @@ class SmaliCodeGenerator : CodeGenerator {
 
         override fun visitMove(move: Node.Move): String = """
         |    add-int/lit8 $DP, $DP, 0x${toHexString(move.amount)}
-        """.trimIndent()
+        """.trimMargin()
 
         override fun visitAdd(add: Node.Add): String = """
         |    aget-byte $TEMP, $MEMORY, $DP
