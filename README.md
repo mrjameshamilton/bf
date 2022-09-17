@@ -2,7 +2,8 @@
 
 An optimizing [brainf*ck](http://brainfuck.org/brainfuck.html) compiler with multiple target backends: 
 JVM using [ProGuardCORE](https://github.com/guardsquare/proguard-core) for code generation, 
-[smali](https://github.com/JesusFreke/smali), C, LLVM IR, ARM assembly, WASM and JavaScript.
+[smali](https://github.com/JesusFreke/smali), dex using [BAT](https://github.com/netomi/bat),
+C, LLVM IR, ARM assembly, WASM and JavaScript.
 
 Some optimizations are applied before code generation:
 
@@ -53,6 +54,14 @@ $ bin/bf examples/helloworld.bf -t smali -o helloworld.smali
 $ smali a helloworld.smali -o classes.dex
 $ adb push classes.dex /sdcard/Download/classes.dex
 $ adb shell dalvikvm -cp /sdcard/Download/classes.dex Main
+```
+
+### Dex
+
+```shell
+$ bin/bf examples/helloworld.bf -t dex -o helloworld.dex
+$ adb push helloworld.dex /sdcard/Download/helloworld.dex
+$ adb shell dalvikvm -cp /sdcard/Download/helloworld.dex Main
 ```
 
 ### C
