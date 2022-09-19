@@ -3,6 +3,7 @@ package eu.jameshamilton.bf
 import eu.jameshamilton.bf.Target.*
 import eu.jameshamilton.bf.backend.arm.ArmCodeGenerator
 import eu.jameshamilton.bf.backend.c.CCodeGenerator
+import eu.jameshamilton.bf.backend.dex.DexCodeGenerator
 import eu.jameshamilton.bf.backend.js.JsCodeGenerator
 import eu.jameshamilton.bf.backend.jvm.JvmCodeGenerator
 import eu.jameshamilton.bf.backend.llvm.LlvmCodeGenerator
@@ -21,6 +22,7 @@ enum class Target {
     JVM,
     C,
     LLVM,
+    DEX,
     SMALI,
     ARM,
     WASM,
@@ -48,6 +50,7 @@ fun main(args: Array<String>) {
             JVM -> JvmCodeGenerator(output == null)
             C -> CCodeGenerator()
             LLVM -> LlvmCodeGenerator()
+            DEX -> DexCodeGenerator()
             SMALI -> SmaliCodeGenerator()
             ARM -> ArmCodeGenerator()
             WASM -> WasmCodeGenerator()

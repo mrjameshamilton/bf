@@ -17,6 +17,10 @@ dependencies {
     implementation("com.guardsquare:proguard-core:9.0.0")
     implementation("org.jetbrains.kotlinx:kotlinx-cli:0.3.4")
 
+    implementation("org.github.netomi.bat:common")
+    implementation("org.github.netomi.bat:dexfile")
+    implementation("org.github.netomi.bat:dexdump")
+
     testImplementation(kotlin("test"))
     testImplementation("io.kotest:kotest-runner-junit5-jvm:5.2.3")
     testImplementation("io.kotest:kotest-assertions-core-jvm:5.2.3")
