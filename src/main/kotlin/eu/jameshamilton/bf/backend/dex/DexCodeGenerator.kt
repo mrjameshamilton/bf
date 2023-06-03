@@ -113,7 +113,7 @@ class DexCodeGenerator : CodeGenerator {
         with(addMethod(name, visibility, modifiers, parameters, returnType).addCode()) {
             InstructionBuilder.of(this).apply {
                 composer(this)
-                prependInstruction(0, this.getInstructionSequence())
+                prependInstructions(0, this.getInstructionSequence())
                 finishEditing(registers)
             }
         }

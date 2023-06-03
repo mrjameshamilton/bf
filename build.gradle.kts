@@ -11,15 +11,16 @@ version = "0.1"
 
 repositories {
     mavenCentral()
+    maven("https://jitpack.io")
 }
 
 dependencies {
     implementation("com.guardsquare:proguard-core:9.0.0")
     implementation("org.jetbrains.kotlinx:kotlinx-cli:0.3.4")
 
-    implementation("org.github.netomi.bat:common")
-    implementation("org.github.netomi.bat:dexfile")
-    implementation("org.github.netomi.bat:dexdump")
+    implementation("com.github.netomi.bat:common:e0d9f969e4f8ca7c95186bf4d2b11ed327bec6e3")
+    implementation("com.github.netomi.bat:dexfile:e0d9f969e4f8ca7c95186bf4d2b11ed327bec6e3")
+    implementation("com.github.netomi.bat:dexdump:e0d9f969e4f8ca7c95186bf4d2b11ed327bec6e3")
 
     testImplementation(kotlin("test"))
     testImplementation("io.kotest:kotest-runner-junit5-jvm:5.2.3")
