@@ -1,7 +1,5 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
-    kotlin("jvm") version "1.6.20"
+    kotlin("jvm") version "1.8.21"
     id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
     application
 }
@@ -23,19 +21,21 @@ dependencies {
     implementation("com.github.netomi.bat:dexdump:e0d9f969e4f8ca7c95186bf4d2b11ed327bec6e3")
 
     testImplementation(kotlin("test"))
-    testImplementation("io.kotest:kotest-runner-junit5-jvm:5.2.3")
-    testImplementation("io.kotest:kotest-assertions-core-jvm:5.2.3")
-    testImplementation("io.kotest:kotest-property-jvm:5.2.3")
-    testImplementation("io.kotest:kotest-framework-datatest:5.2.3")
+    testImplementation("io.kotest:kotest-runner-junit5-jvm:5.6.2")
+    testImplementation("io.kotest:kotest-assertions-core-jvm:5.6.2")
+    testImplementation("io.kotest:kotest-property-jvm:5.6.2")
+    testImplementation("io.kotest:kotest-framework-datatest:5.6.2")
     testImplementation("io.mockk:mockk:1.12.3")
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
 }
 
 tasks.test {
     useJUnitPlatform()
-}
-
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
 }
 
 application {
