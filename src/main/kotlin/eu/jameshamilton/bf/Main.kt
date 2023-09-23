@@ -11,7 +11,7 @@ import eu.jameshamilton.bf.backend.smali.SmaliCodeGenerator
 import eu.jameshamilton.bf.backend.wasm.WasmCodeGenerator
 import eu.jameshamilton.bf.frontend.Parser
 import eu.jameshamilton.bf.frontend.Scanner
-import eu.jameshamilton.bf.lox.LoxCodeGenerator
+import eu.jameshamilton.bf.backend.lox.LoxCodeGenerator
 import eu.jameshamilton.bf.optimize.Optimizer
 import kotlinx.cli.ArgParser
 import kotlinx.cli.ArgType

@@ -1,4 +1,4 @@
-package eu.jameshamilton.bf.lox
+package eu.jameshamilton.bf.backend.lox
 
 import eu.jameshamilton.bf.backend.CodeGenerator
 import eu.jameshamilton.bf.frontend.Node
