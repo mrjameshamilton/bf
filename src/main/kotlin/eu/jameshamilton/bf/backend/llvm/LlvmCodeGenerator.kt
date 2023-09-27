@@ -42,14 +42,12 @@ class LlvmCodeGenerator : CodeGenerator {
             """.trimMargin()
         }
 
-        override fun visitAdd(add: Node.Add): String = declare(5) { (a, b, c, d, e) ->
+        override fun visitAdd(add: Node.Add): String = declare(3) { (a, b, c) ->
             """
             |    %$a = load i8*, i8** %$ptr, align 8
             |    %$b = load i8, i8* %$a, align 1
-            |    %$c = sext i8 %$b to i32
-            |    %$d = add nsw i32 %$c, ${add.amount}
-            |    %$e = trunc i32 %$d to i8
-            |    store i8 %$e, i8* %$a, align 1
+            |    %$c = add i8 %$b, ${add.amount}
+            |    store i8 %$c, i8* %$a, align 1
             """.trimMargin()
         }
 
@@ -60,15 +58,14 @@ class LlvmCodeGenerator : CodeGenerator {
             """.trimMargin()
         }
 
-        override fun visitLoop(loop: Node.Loop): String = declare(6) { (cond, a, b, c, d, body) ->
+        override fun visitLoop(loop: Node.Loop): String = declare(5) { (cond, a, b, c, body) ->
             """
             |    br label %$cond
             |$cond:
             |    %$a = load i8*, i8** %$ptr, align 8
             |    %$b = load i8, i8* %$a, align 1
-            |    %$c = sext i8 %$b to i32
-            |    %$d = icmp ne i32 %$c, 0
-            |    br i1 %$d, label %$body, label %end$cond
+            |    %$c = icmp ne i8 %$b, 0
+            |    br i1 %$c, label %$body, label %end$cond
             |$body:
             |${loop.bodyAccept(this, ::concat)}
             |    br label %$cond
